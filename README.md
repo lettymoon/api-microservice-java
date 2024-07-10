@@ -32,7 +32,7 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 
 ## 📝 Controle de atividades 📝
 
-- [ ] criar projeto spring
+- [ ] criar projeto spring - ok
 - [ ] conectar banco (h2)
 - [ ] utilizar o create para cadastrar o usuário
 - [ ] criar operações read
