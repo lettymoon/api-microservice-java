@@ -9,4 +9,8 @@ public class WebConfiguration {
     public String applicationName(){
         return "Banco Javer";
     }
+    @Bean(name = "nomeCliente")
+    public String nomeCliente(){
+        return "Letícia";
+    }
 }

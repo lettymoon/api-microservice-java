@@ -33,12 +33,12 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 ## 📝 Controle de atividades 📝
 
 - [ ] criar projeto spring - ok
-- [ ] conectar banco (h2)
-- [ ] utilizar o create para cadastrar o usuário
+- [ ] criar as entidades e o banco de dados
 - [ ] criar operações read
 - [ ] criar operações create
 - [ ] criar operações update
 - [ ] criar operações delete
+- [ ] utilizar o create para cadastrar o usuário
 - [ ] criar testes unitários
 - [ ] garantir cobertura de 100% dos testes
 - [ ] desafio ec2
