@@ -32,8 +32,8 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 
 ## 📝 Controle de atividades 📝
 
-- [ ] criar projeto spring - ok
-- [ ] criar as entidades e o banco de dados
+- [x] criar projeto spring
+- [x] criar as entidades e o banco de dados
 - [ ] criar operações read
 - [ ] criar operações create
 - [ ] criar operações update
