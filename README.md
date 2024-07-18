@@ -34,8 +34,8 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 
 - [x] criar projeto spring
 - [x] criar as entidades e o banco de dados
-- [ ] criar operações read
-- [ ] criar operações create
+- [x] criar operações read
+- [x] criar operações create
 - [ ] criar operações update
 - [ ] criar operações delete
 - [ ] utilizar o create para cadastrar o usuário
