@@ -1,9 +1,9 @@
-package ibm.javer.javer.domain.controller;
+package ibm.javer.javer.controller;
 
-import ibm.javer.javer.domain.entity.Usuario;
-import ibm.javer.javer.domain.repository.UsuariosRepository;
-import ibm.javer.javer.domain.service.dto.UsuarioRequestDTO;
-import ibm.javer.javer.domain.service.dto.UsuarioResponseDTO;
+import ibm.javer.javer.entity.Usuario;
+import ibm.javer.javer.repository.UsuariosRepository;
+import ibm.javer.javer.service.dto.UsuarioRequestDTO;
+import ibm.javer.javer.service.dto.UsuarioResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

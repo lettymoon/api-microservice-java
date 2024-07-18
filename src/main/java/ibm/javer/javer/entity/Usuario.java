@@ -1,5 +1,6 @@
-package ibm.javer.javer.Usuario;
+package ibm.javer.javer.entity;
 
+import ibm.javer.javer.service.dto.UsuarioRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

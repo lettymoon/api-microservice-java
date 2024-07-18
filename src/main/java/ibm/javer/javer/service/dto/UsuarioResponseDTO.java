@@ -1,4 +1,6 @@
-package ibm.javer.javer.Usuario;
+package ibm.javer.javer.service.dto;
+
+import ibm.javer.javer.entity.Usuario;
 
 public record UsuarioResponseDTO(Long id, String cpf, String nome, Long telefone, Boolean correntista, Float score_credito, Float saldo_cc) {
     public UsuarioResponseDTO(Usuario usuario){
