@@ -20,7 +20,7 @@ public class UsuariosService {
 
     // TODO: tem que ser uma transaction
     public ResponseDTO<UsuarioResponseDTO> createUser(UsuarioRequestDTO data) {
-        Optional<Usuario> existingUser = usuariosRepository.findByCpf(data.cpf());
+        Optional<Usuario> existingUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (existingUser.isPresent()) {
             return new ResponseDTO<>("Usuário já existe", null, HttpStatus.CONFLICT);
@@ -65,7 +65,7 @@ public class UsuariosService {
     }
 
     public ResponseDTO<UsuarioResponseDTO> updateUser(UsuarioRequestDTO data) {
-        Optional<Usuario> oldUser = usuariosRepository.findByCpf(data.cpf());
+        Optional<Usuario> oldUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (!oldUser.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);

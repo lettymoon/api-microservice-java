@@ -6,6 +6,7 @@ import ibm.javer.javer.service.dto.ResponseDTO;
 import ibm.javer.javer.service.dto.UsuarioByIdResponseDTO;
 import ibm.javer.javer.service.dto.UsuarioRequestDTO;
 import ibm.javer.javer.service.dto.UsuarioResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class UsuariosController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDTO> createUser(@RequestBody UsuarioRequestDTO data){
+    public ResponseEntity<ResponseDTO> createUser(@Valid @RequestBody UsuarioRequestDTO data){
         ResponseDTO<UsuarioResponseDTO> response = usuariosService.createUser(data);
 
         return ResponseEntity.status(response.getStatus()).body(response);

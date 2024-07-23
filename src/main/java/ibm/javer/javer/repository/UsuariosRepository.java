@@ -11,4 +11,7 @@ public interface UsuariosRepository extends JpaRepository<Usuario, String> {
 
     @Query(value = "SELECT * FROM usuarios WHERE cpf = :cpf", nativeQuery = true)
     Optional<Usuario> findByCpf(@Param("cpf") String cpf);
+
+    @Query(value = "SELECT * FROM usuarios WHERE id = :id", nativeQuery = true)
+    Optional<Usuario> findById(@Param("id") String id);
 }

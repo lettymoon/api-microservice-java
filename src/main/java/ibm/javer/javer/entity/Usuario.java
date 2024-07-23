@@ -2,6 +2,7 @@ package ibm.javer.javer.entity;
 
 import ibm.javer.javer.service.dto.UsuarioRequestDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -25,7 +26,7 @@ public class Usuario {
     private String nome;
 
     @Column(name = "telefone")
-    private Long telefone;
+    private String telefone;
 
     @Column(name = "correntista")
     private Boolean correntista;
@@ -34,14 +35,13 @@ public class Usuario {
     private Float score_credito;
 
     @Column(name = "saldo_cc")
-    // TODO: Definir valor default
     private Float saldo_cc;
 
     public Usuario(UsuarioRequestDTO data) {
-        this.cpf = data.cpf();
-        this.nome = data.nome();
-        this.telefone = data.telefone();
-        this.correntista = data.correntista();
+        this.cpf = data.getCpf();
+        this.nome = data.getNome();
+        this.telefone = data.getTelefone();
+        this.correntista = data.getCorrentista();
         this.score_credito = (float) 0;
         this.saldo_cc = (float) 0;
     }
