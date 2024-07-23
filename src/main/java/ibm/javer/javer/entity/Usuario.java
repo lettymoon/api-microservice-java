@@ -2,23 +2,21 @@ package ibm.javer.javer.entity;
 
 import ibm.javer.javer.service.dto.UsuarioRequestDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "usuarios")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "cpf", unique = true)
     private String cpf;
@@ -44,5 +42,7 @@ public class Usuario {
         this.nome = data.nome();
         this.telefone = data.telefone();
         this.correntista = data.correntista();
+        this.score_credito = (float) 0;
+        this.saldo_cc = (float) 0;
     }
 }
