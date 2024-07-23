@@ -36,8 +36,8 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 - [x] criar as entidades e o banco de dados
 - [x] criar operações read
 - [x] criar operações create
-- [ ] criar operações update
-- [ ] criar operações delete
+- [x] criar operações update
+- [x] criar operações delete
 - [ ] utilizar o create para cadastrar o usuário
 - [ ] criar testes unitários
 - [ ] garantir cobertura de 100% dos testes
