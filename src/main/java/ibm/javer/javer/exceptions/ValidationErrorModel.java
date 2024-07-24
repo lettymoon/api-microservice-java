@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ValidationError {
+public class ValidationErrorModel {
     private String field;
     private String message;
 
-    public ValidationError(String field, String message) {
+    public ValidationErrorModel(String field, String message) {
         this.field = field;
         this.message = message;
     }
