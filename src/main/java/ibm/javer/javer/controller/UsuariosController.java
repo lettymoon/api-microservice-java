@@ -8,13 +8,14 @@ import ibm.javer.javer.service.dto.UsuarioRequestDTO;
 import ibm.javer.javer.service.dto.UsuarioResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 public class UsuariosController {
     @Autowired
     private UsuariosRepository repository;
@@ -36,14 +37,14 @@ public class UsuariosController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> getUser(@PathVariable String id){
         ResponseDTO<UsuarioByIdResponseDTO> response = usuariosService.getUser(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String id){
         ResponseDTO<UsuarioResponseDTO> response = usuariosService.deleteUser(id);
 
@@ -53,6 +54,13 @@ public class UsuariosController {
     @PutMapping
     public ResponseEntity<ResponseDTO> updateUser(@RequestBody UsuarioRequestDTO data){
         ResponseDTO<UsuarioResponseDTO> response = usuariosService.updateUser(data);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PatchMapping("/{cpf}/score-credito")
+    public ResponseEntity<ResponseDTO> updateScore(@PathVariable String cpf){
+        ResponseDTO<Float> response = usuariosService.updateScore(cpf);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
