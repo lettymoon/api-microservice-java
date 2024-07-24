@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +16,21 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseDTO<Map<String, List<String>>>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).collect(Collectors.toList());
+    public ResponseEntity<ResponseDTO<Map<String, List<ValidationError>>>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        List<ValidationError> errors = ex.getBindingResult().getFieldErrors()
+                .stream()
+                .map(fieldError -> new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))
+                .sorted((err1, err2) -> err1.getField().compareTo(err2.getField()))
+                .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDTO<>("Erro ao validar objeto", getErrorsMap(errors), null));
     }
 
-    private Map<String, List<String>> getErrorsMap(List<String> errors) {
-        Map<String, List<String>> errorResponse = new HashMap<>();
+    private Map<String, List<ValidationError>> getErrorsMap(List<ValidationError> errors) {
+        Map<String, List<ValidationError>> errorResponse = new HashMap<>();
         errorResponse.put("errors", errors);
         return errorResponse;
     }
+
 }
