@@ -1,14 +1,13 @@
-package ibm.javer.javer.controller;
+package ibm.javer.javer.controllers;
 
-import ibm.javer.javer.repository.UsuariosRepository;
-import ibm.javer.javer.service.UsuariosService;
-import ibm.javer.javer.service.dto.ResponseDTO;
-import ibm.javer.javer.service.dto.UsuarioByIdResponseDTO;
-import ibm.javer.javer.service.dto.UsuarioRequestDTO;
-import ibm.javer.javer.service.dto.UsuarioResponseDTO;
+import ibm.javer.javer.repositories.UserRepository;
+import ibm.javer.javer.services.UserService;
+import ibm.javer.javer.dtos.ResponseDTO;
+import ibm.javer.javer.dtos.UsuarioByIdResponseDTO;
+import ibm.javer.javer.dtos.UsuarioRequestDTO;
+import ibm.javer.javer.dtos.UsuarioResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +17,10 @@ import java.util.List;
 @RequestMapping("/users")
 public class UsuariosController {
     @Autowired
-    private UsuariosRepository repository;
+    private UserRepository repository;
 
     @Autowired
-    private UsuariosService usuariosService;
+    private UserService usuariosService;
 
     @GetMapping
     public ResponseEntity<ResponseDTO<List<UsuarioResponseDTO>>> gettAllUsers(){

@@ -1,4 +1,4 @@
-package ibm.javer.javer.service.dto;
+package ibm.javer.javer.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

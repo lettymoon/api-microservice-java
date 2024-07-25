@@ -1,18 +1,17 @@
-package ibm.javer.javer.entity;
+package ibm.javer.javer.domain.user;
 
-import ibm.javer.javer.service.dto.UsuarioRequestDTO;
+import ibm.javer.javer.dtos.UsuarioRequestDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-@Entity
-@Table(name = "usuarios")
+@Entity(name = "users")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,14 +34,14 @@ public class Usuario {
     private Float score_credito;
 
     @Column(name = "saldo_cc")
-    private Float saldo_cc;
+    private Float saldo_cc = 0.0f;
 
-    public Usuario(UsuarioRequestDTO data) {
+    public User(UsuarioRequestDTO data) {
         this.cpf = data.getCpf();
         this.nome = data.getNome();
         this.telefone = data.getTelefone();
         this.correntista = data.getCorrentista();
-        this.score_credito = (float) 0;
-        this.saldo_cc = (float) 0;
+        this.score_credito = (float)0;
+        this.saldo_cc = data.getSaldo_cc();
     }
 }

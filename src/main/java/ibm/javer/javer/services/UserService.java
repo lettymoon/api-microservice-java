@@ -1,11 +1,11 @@
-package ibm.javer.javer.service;
+package ibm.javer.javer.services;
 
-import ibm.javer.javer.entity.Usuario;
-import ibm.javer.javer.repository.UsuariosRepository;
-import ibm.javer.javer.service.dto.ResponseDTO;
-import ibm.javer.javer.service.dto.UsuarioByIdResponseDTO;
-import ibm.javer.javer.service.dto.UsuarioRequestDTO;
-import ibm.javer.javer.service.dto.UsuarioResponseDTO;
+import ibm.javer.javer.domain.user.User;
+import ibm.javer.javer.repositories.UserRepository;
+import ibm.javer.javer.dtos.ResponseDTO;
+import ibm.javer.javer.dtos.UsuarioByIdResponseDTO;
+import ibm.javer.javer.dtos.UsuarioRequestDTO;
+import ibm.javer.javer.dtos.UsuarioResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,26 +14,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuariosService {
+public class UserService {
     @Autowired
-    UsuariosRepository usuariosRepository;
+    UserRepository usuariosRepository;
 
     // TODO: tem que ser uma transaction
     public ResponseDTO<UsuarioResponseDTO> createUser(UsuarioRequestDTO data) {
-        Optional<Usuario> existingUser = usuariosRepository.findByCpf(data.getCpf());
+        Optional<User> existingUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (existingUser.isPresent()) {
             return new ResponseDTO<>("Usuário já existe", null, HttpStatus.CONFLICT);
         }
 
         //TODO: Tratar erro de bancos
-        Usuario newUser = new Usuario(data);
+        User newUser = new User(data);
         usuariosRepository.save(newUser);
         return new ResponseDTO<>("Usuário cadastrado com sucesso", new UsuarioResponseDTO(newUser), HttpStatus.CREATED);
     }
 
     public ResponseDTO<UsuarioByIdResponseDTO> getUser(String id) {
-        Optional<Usuario> user = usuariosRepository.findById(id);
+        Optional<User> user = usuariosRepository.findById(id);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não encontrado", null, HttpStatus.NOT_FOUND);
@@ -54,7 +54,7 @@ public class UsuariosService {
     }
 
     public ResponseDTO<UsuarioResponseDTO> deleteUser(String id) {
-        Optional<Usuario> user = usuariosRepository.findById(id);
+        Optional<User> user = usuariosRepository.findById(id);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
@@ -65,13 +65,13 @@ public class UsuariosService {
     }
 
     public ResponseDTO<UsuarioResponseDTO> updateUser(UsuarioRequestDTO data) {
-        Optional<Usuario> oldUser = usuariosRepository.findByCpf(data.getCpf());
+        Optional<User> oldUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (!oldUser.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
         }
 
-        Usuario newUser = new Usuario(data);
+        User newUser = new User(data);
         newUser.setId(oldUser.get().getId());
         newUser.setSaldo_cc(oldUser.get().getSaldo_cc());
         newUser.setScore_credito(oldUser.get().getScore_credito());
@@ -83,7 +83,7 @@ public class UsuariosService {
     }
 
     public ResponseDTO<Float> updateScore(String cpf){
-        Optional<Usuario> user = usuariosRepository.findByCpf(cpf);
+        Optional<User> user = usuariosRepository.findByCpf(cpf);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);

@@ -38,7 +38,7 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 - [x] criar operações create
 - [x] criar operações update
 - [x] criar operações delete
-- [ ] utilizar o create para cadastrar o usuário
+- [x] utilizar o create para cadastrar o usuário
 - [ ] criar testes unitários
 - [ ] garantir cobertura de 100% dos testes
 - [ ] desafio ec2

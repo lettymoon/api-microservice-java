@@ -1,6 +1,6 @@
 package ibm.javer.javer.exceptions;
 
-import ibm.javer.javer.service.dto.ResponseDTO;
+import ibm.javer.javer.dtos.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package ibm.javer.javer.service.dto;
+package ibm.javer.javer.dtos;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -25,4 +25,7 @@ public class UsuarioRequestDTO {
 
     @NotNull(message = "O campo correntista é obrigatório")
     Boolean correntista;
+
+    @Min(value = 0, message = "O valor deve ser maior ou igual a zero")
+    Float saldo_cc;
 }

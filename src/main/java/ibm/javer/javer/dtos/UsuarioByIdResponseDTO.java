@@ -1,9 +1,9 @@
-package ibm.javer.javer.service.dto;
+package ibm.javer.javer.dtos;
 
-import ibm.javer.javer.entity.Usuario;
+import ibm.javer.javer.domain.user.User;
 
 public record UsuarioByIdResponseDTO(String id, String cpf, String nome, String telefone, Boolean correntista, Float score_credito, Float saldo_cc) {
-    public UsuarioByIdResponseDTO(Usuario usuario){
+    public UsuarioByIdResponseDTO(User usuario){
         this(usuario.getId(), usuario.getCpf(), usuario.getNome(), usuario.getTelefone(), usuario.getCorrentista(), usuario.getScore_credito(), usuario.getSaldo_cc());
     }
 }
