@@ -6,6 +6,7 @@ import ibm.javer.javer.dtos.ResponseDTO;
 import ibm.javer.javer.dtos.UserAllDataResponseDTO;
 import ibm.javer.javer.dtos.UserRequestDTO;
 import ibm.javer.javer.dtos.UserResponseDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +32,8 @@ class UserServiceTest {
     private UserRepository userRepository;
 
     @Test
-    public void testGetUserById_UserExists() {
+    @DisplayName("Given User Exists When GetUserById Then Return User Data")
+    public void givenUserExists_whenGetUserById_thenReturnUserData() {
         String userId = UUID.randomUUID().toString();
         User mockUser = new User();
         mockUser.setId(userId);
@@ -46,7 +48,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetUserById_UserDoesNotExist() {
+    @DisplayName("Given User Does Not Exist When GetUserById Then Return Not Found")
+    public void givenUserDoesNotExist_whenGetUserById_thenReturnNotFound() {
         String userId = UUID.randomUUID().toString();
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
@@ -58,7 +61,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testCreateUser_UserAlreadyExists() {
+    @DisplayName("Given User Already Exists When CreateUser Then Return Conflict")
+    public void givenUserAlreadyExists_whenCreateUser_thenReturnConflict() {
         String cpf = "12345678910";
         UserRequestDTO userRequest = new UserRequestDTO();
         userRequest.setCpf(cpf);
@@ -72,7 +76,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testCreateUser_NewUser() {
+    @DisplayName("Given New User When CreateUser Then Return Created")
+    public void givenNewUser_whenCreateUser_thenReturnCreated() {
         String cpf = "12345678910";
         UserRequestDTO userRequest = new UserRequestDTO();
         userRequest.setCpf(cpf);
@@ -90,7 +95,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser_UserExists() {
+    @DisplayName("Given User Exists When DeleteUser Then Return Success")
+    public void givenUserExists_whenDeleteUser_thenReturnSuccess() {
         String userId = UUID.randomUUID().toString();
         User mockUser = new User();
         mockUser.setId(userId);
@@ -105,7 +111,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser_UserDoesNotExist() {
+    @DisplayName("Given User Does Not Exist When DeleteUser Then Return Not Found")
+    public void givenUserDoesNotExist_whenDeleteUser_thenReturnNotFound() {
         String userId = UUID.randomUUID().toString();
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
@@ -118,7 +125,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAllUsers_NoUsersFound() {
+    @DisplayName("Given No Users When GetAllUsers Then Return Empty List")
+    public void givenNoUsers_whenGetAllUsers_thenReturnEmptyList() {
         when(userRepository.findAll()).thenReturn(Collections.emptyList());
 
         ResponseDTO<List<UserResponseDTO>> response = userService.getAllUsers();
@@ -130,7 +138,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAllUsers_UsersFound() {
+    @DisplayName("Given Users Exist When GetAllUsers Then Return User List")
+    public void givenUsersExist_whenGetAllUsers_thenReturnUserList() {
         String userId = UUID.randomUUID().toString();
         User mockUser = new User();
         mockUser.setId(userId);
@@ -145,7 +154,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUser_UserExists() {
+    @DisplayName("Given User Exists When UpdateUser Then Return Success")
+    public void givenUserExists_whenUpdateUser_thenReturnSuccess() {
         String cpf = "12345678910";
         String userId = UUID.randomUUID().toString();
         UserRequestDTO userRequest = new UserRequestDTO();
@@ -170,7 +180,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUser_UserDoesNotExist() {
+    @DisplayName("Given User Does Not Exist When UpdateUser Then Return Not Found")
+    public void givenUserDoesNotExist_whenUpdateUser_thenReturnNotFound() {
         String cpf = "12345678910";
         UserRequestDTO userRequest = new UserRequestDTO();
         userRequest.setCpf(cpf);
@@ -185,7 +196,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUpdateScore_UserExists() {
+    @DisplayName("Given User Exists When UpdateScore Then Return Updated Score")
+    public void givenUserExists_whenUpdateScore_thenReturnUpdatedScore() {
         String cpf = "12345678910";
         User user = new User();
         user.setCpf(cpf);
@@ -203,7 +215,8 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUpdateScore_UserDoesNotExist() {
+    @DisplayName("Given User Does Not Exist When UpdateScore Then Return Not Found")
+    public void givenUserDoesNotExist_whenUpdateScore_thenReturnNotFound() {
         String cpf = "12345678910";
 
         when(userRepository.findByCpf(cpf)).thenReturn(Optional.empty());
