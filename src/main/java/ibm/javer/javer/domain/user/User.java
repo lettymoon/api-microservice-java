@@ -31,17 +31,17 @@ public class User {
     private Boolean correntista;
 
     @Column(name = "score_credito")
-    private Float score_credito;
+    private Double score_credito;
 
     @Column(name = "saldo_cc")
-    private Float saldo_cc;
+    private Double saldo_cc;
 
     public User(UserRequestDTO data) {
         this.cpf = data.getCpf();
         this.nome = data.getNome();
         this.telefone = data.getTelefone();
         this.correntista = data.getCorrentista();
-        this.score_credito = (float)0;
+        this.score_credito = 0.0;
         this.saldo_cc = data.getSaldo_cc();
     }
 }

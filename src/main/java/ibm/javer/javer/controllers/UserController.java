@@ -59,7 +59,7 @@ public class UserController {
 
     @PatchMapping("/{cpf}/score-credito")
     public ResponseEntity<ResponseDTO> updateScore(@PathVariable String cpf){
-        ResponseDTO<Float> response = usersService.updateScore(cpf);
+        ResponseDTO<Double> response = usersService.updateScore(cpf);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }

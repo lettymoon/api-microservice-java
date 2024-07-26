@@ -82,14 +82,14 @@ public class UserService {
 
     }
 
-    public ResponseDTO<Float> updateScore(String cpf){
+    public ResponseDTO<Double> updateScore(String cpf){
         Optional<User> user = usuariosRepository.findByCpf(cpf);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
         }
 
-        user.get().setScore_credito(user.get().getSaldo_cc() * (float)0.1);
+        user.get().setScore_credito(user.get().getSaldo_cc() * 0.1);
         usuariosRepository.save(user.get());
 
         return new ResponseDTO<>("Score atual", user.get().getScore_credito(), HttpStatus.OK);

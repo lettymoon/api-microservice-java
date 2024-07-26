@@ -30,5 +30,5 @@ public class UserRequestDTO {
     @NotNull(message = "O campo saldo não pode ser nulo")
     @NotEmpty(message = "O campo saldo é obrigatório")
     @Min(value = 0, message = "O valor deve ser maior ou igual a zero")
-    Float saldo_cc;
+    Double saldo_cc;
 }
