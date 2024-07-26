@@ -7,7 +7,8 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
-public class UsuarioRequestDTO {
+@AllArgsConstructor
+public class UserRequestDTO {
     @NotNull(message = "O campo cpf não pode ser nulo")
     @NotBlank(message = "O campo cpf é obrigatório")
     @Size(min = 11, max = 11, message = "O campo cpf é inválido")
@@ -26,6 +27,8 @@ public class UsuarioRequestDTO {
     @NotNull(message = "O campo correntista é obrigatório")
     Boolean correntista;
 
+    @NotNull(message = "O campo saldo não pode ser nulo")
+    @NotEmpty(message = "O campo saldo é obrigatório")
     @Min(value = 0, message = "O valor deve ser maior ou igual a zero")
     Float saldo_cc;
 }

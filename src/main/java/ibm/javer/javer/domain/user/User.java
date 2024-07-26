@@ -1,6 +1,6 @@
 package ibm.javer.javer.domain.user;
 
-import ibm.javer.javer.dtos.UsuarioRequestDTO;
+import ibm.javer.javer.dtos.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,9 +34,9 @@ public class User {
     private Float score_credito;
 
     @Column(name = "saldo_cc")
-    private Float saldo_cc = 0.0f;
+    private Float saldo_cc;
 
-    public User(UsuarioRequestDTO data) {
+    public User(UserRequestDTO data) {
         this.cpf = data.getCpf();
         this.nome = data.getNome();
         this.telefone = data.getTelefone();

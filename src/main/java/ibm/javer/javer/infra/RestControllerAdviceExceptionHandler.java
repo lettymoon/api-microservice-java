@@ -1,4 +1,4 @@
-package ibm.javer.javer.exceptions;
+package ibm.javer.javer.infra;
 
 import ibm.javer.javer.dtos.ResponseDTO;
 import org.springframework.http.HttpStatus;
