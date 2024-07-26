@@ -3,7 +3,7 @@ package ibm.javer.javer.services;
 import ibm.javer.javer.domain.user.User;
 import ibm.javer.javer.repositories.UserRepository;
 import ibm.javer.javer.dtos.ResponseDTO;
-import ibm.javer.javer.dtos.UserByIdResponseDTO;
+import ibm.javer.javer.dtos.UserAllDataResponseDTO;
 import ibm.javer.javer.dtos.UserRequestDTO;
 import ibm.javer.javer.dtos.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserService {
     UserRepository usuariosRepository;
 
     // TODO: tem que ser uma transaction
-    public ResponseDTO<UserResponseDTO> createUser(UserRequestDTO data) {
+    public ResponseDTO<UserAllDataResponseDTO> createUser(UserRequestDTO data) {
         Optional<User> existingUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (existingUser.isPresent()) {
@@ -29,17 +29,17 @@ public class UserService {
         //TODO: Tratar erro de bancos
         User newUser = new User(data);
         usuariosRepository.save(newUser);
-        return new ResponseDTO<>("Usuário cadastrado com sucesso", new UserResponseDTO(newUser), HttpStatus.CREATED);
+        return new ResponseDTO<>("Usuário cadastrado com sucesso", new UserAllDataResponseDTO(newUser), HttpStatus.CREATED);
     }
 
-    public ResponseDTO<UserByIdResponseDTO> getUser(String id) {
+    public ResponseDTO<UserAllDataResponseDTO> getUserById(String id) {
         Optional<User> user = usuariosRepository.findById(id);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não encontrado", null, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseDTO<>("Usuário encontrado com sucesso", new UserByIdResponseDTO(user.get()), HttpStatus.OK);
+        return new ResponseDTO<>("Usuário encontrado com sucesso", new UserAllDataResponseDTO(user.get()), HttpStatus.OK);
     }
 
     public ResponseDTO<List<UserResponseDTO>> getAllUsers(){
@@ -53,7 +53,7 @@ public class UserService {
         return new ResponseDTO<>("Usuários encontrados com sucesso", usuariosList, HttpStatus.OK);
     }
 
-    public ResponseDTO<UserResponseDTO> deleteUser(String id) {
+    public ResponseDTO<UserAllDataResponseDTO> deleteUser(String id) {
         Optional<User> user = usuariosRepository.findById(id);
 
         if (!user.isPresent()) {
@@ -61,10 +61,10 @@ public class UserService {
         }
 
         usuariosRepository.deleteById(id);
-        return new ResponseDTO<>("Usuário deletado com sucesso :3", new UserResponseDTO(user.get()), HttpStatus.OK);
+        return new ResponseDTO<>("Usuário deletado com sucesso :3", new UserAllDataResponseDTO(user.get()), HttpStatus.OK);
     }
 
-    public ResponseDTO<UserResponseDTO> updateUser(UserRequestDTO data) {
+    public ResponseDTO<UserAllDataResponseDTO> updateUser(UserRequestDTO data) {
         Optional<User> oldUser = usuariosRepository.findByCpf(data.getCpf());
 
         if (!oldUser.isPresent()) {
@@ -78,7 +78,7 @@ public class UserService {
 
         usuariosRepository.save(newUser);
 
-        return new ResponseDTO<>("Usuário atualizado com sucesso", new UserResponseDTO(newUser), HttpStatus.OK);
+        return new ResponseDTO<>("Usuário atualizado com sucesso", new UserAllDataResponseDTO(newUser), HttpStatus.OK);
 
     }
 

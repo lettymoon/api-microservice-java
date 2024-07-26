@@ -1,9 +1,21 @@
 package ibm.javer.javer.dtos;
 
 import ibm.javer.javer.domain.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record UserResponseDTO(String id, String nome) {
-    public UserResponseDTO(User usuario){
-        this(usuario.getId(), usuario.getNome());
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserResponseDTO {
+    private String id;
+    private String nome;
+
+    public UserResponseDTO(User usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
     }
 }

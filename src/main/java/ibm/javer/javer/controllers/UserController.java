@@ -3,7 +3,7 @@ package ibm.javer.javer.controllers;
 import ibm.javer.javer.repositories.UserRepository;
 import ibm.javer.javer.services.UserService;
 import ibm.javer.javer.dtos.ResponseDTO;
-import ibm.javer.javer.dtos.UserByIdResponseDTO;
+import ibm.javer.javer.dtos.UserAllDataResponseDTO;
 import ibm.javer.javer.dtos.UserRequestDTO;
 import ibm.javer.javer.dtos.UserResponseDTO;
 import jakarta.validation.Valid;
@@ -31,28 +31,28 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<ResponseDTO> createUser(@Valid @RequestBody UserRequestDTO data){
-        ResponseDTO<UserResponseDTO> response = usersService.createUser(data);
+        ResponseDTO<UserAllDataResponseDTO> response = usersService.createUser(data);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDTO> getUser(@PathVariable String id){
-        ResponseDTO<UserByIdResponseDTO> response = usersService.getUser(id);
+    public ResponseEntity<ResponseDTO> getUserById(@PathVariable String id){
+        ResponseDTO<UserAllDataResponseDTO> response = usersService.getUserById(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String id){
-        ResponseDTO<UserResponseDTO> response = usersService.deleteUser(id);
+        ResponseDTO<UserAllDataResponseDTO> response = usersService.deleteUser(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PutMapping
     public ResponseEntity<ResponseDTO> updateUser(@RequestBody UserRequestDTO data){
-        ResponseDTO<UserResponseDTO> response = usersService.updateUser(data);
+        ResponseDTO<UserAllDataResponseDTO> response = usersService.updateUser(data);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
