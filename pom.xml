@@ -11,7 +11,7 @@
 
 	<groupId>ibm.javer</groupId>
 	<artifactId>javer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<name>javer</name>
 	<description>Projeto final IBM ITAU 2024 - Cadastro de clientes do banco JAVER</description>
