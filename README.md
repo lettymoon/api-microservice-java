@@ -1,44 +1,149 @@
-# 🚀 Desafio: Conectando Microserviços na Nuvem 🚀
+# Banco Javer - Itaú/IBM
 
-Bem-vindos, desenvolvedores intrépidos, ao nosso desafio de programação! Preparem-se para uma jornada emocionante onde vocês irão explorar os confins do Springboot, criar microserviços interconectados e levá-los para a nuvem!
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
-## 🛠️ Missão: Criar duas aplicações em Springboot, cada uma desempenhando um papel crucial em nosso ecossistema de microsserviços.
+Este projeto consiste em uma API desenvolvida com **Java**, utilizando o framework **Java Spring** e o **banco de dados H2.**
 
-TEMA: Cadastro de clientes do banco JAVER
-Informações do cliente (Para CRUD):
+Foi realizado os testes unitários no formato Given-When-Then (GWT), utilizando as bibliotecas **JUnit, Mockito e AssertJ.**
 
-- nome (String)
+Este projeto foi desenvolvido como avaliação final da trilha de Java do projeto Itaú/IBM.
 
-- telefone (Long)
+## TO-DO: COLOCAR UMA LICENSA MIT
 
-- correntista (Boolean)
-- score_credito (Float)
+## Índice
 
-- saldo_cc (Float)
+- [Instalação](#instalação)
+- [Configurações](#configurações)
+- [Usando](#usando)
+- [API Endpoints](#api-endpoints)
+- [Banco de Dados](#banco-de-dados)
 
-1. Primeira Aplicação: Esta aplicação será nossa ponte para a segunda. Ela deve realizar requisições REST para a segunda aplicação. Além disso, é responsável por expor os quatro endpoints CRUD (Create, Read, Update, Delete) e um endpoint adicional que realizará um cálculo simples de score de credito (saldo_cc * 0,1) com as informações obtidas da base de dados da segunda aplicação.
+## Instalação
 
-2. Segunda Aplicação: Esta aplicação é o coração do nosso sistema de armazenamento. Ela será responsável por realizar operações CRUD em uma base de dados local H2.
+## Configurações
 
-🧪 Requisitos de Testes: Ambas as aplicações devem possuir 100% de cobertura de testes unitários. Garantir que suas implementações estejam robustamente testadas para garantir a qualidade e a confiabilidade do código.
+## Usando
 
-🔍 Desafio Extra: Para os bravos que desejam ir além, o desafio extra aguarda! Você pode hospedar ambas as aplicações em instâncias EC2 do tipo t2.micro na AWS e expor seus endpoints publicamente na nuvem. Além disso, a base de dados pode residir em um RDS gratuito. Desafie-se a explorar os limites da computação em nuvem!
+## Arquitetura
 
-🚨 Importante: Lembre-se de documentar adequadamente suas implementações, fornecendo instruções claras sobre como executar, testar e acessar suas aplicações. Ao final da trilha, cada um deverá apresentar o que foi desenvolvido! Portanto treine no espelho sua apresentação.
+O projeto segue uma arquitetura simples com Docker.
 
-🏆 Premiação: Além da satisfação pessoal de conquistar este desafio, os participantes terão a oportunidade de aprimorar suas habilidades em desenvolvimento de microserviços, testes unitários e computação em nuvem.
+```mermaid
+graph TD
+    subgraph Aplication
+        direction TB
+        JavaApp["API Java"]
+        H2Database[("H2 Database")]
+        JavaApp --> H2Database
+    end
+```
 
-Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos estejam a seu favor e que a nuvem seja sua aliada nesta aventura! Boa sorte, programadores! 🚀🔥
+## API Endpoints
+A API fornece os seguintes endpoints:
 
-## 📝 Controle de atividades 📝
+**POST USERS**
 
-- [x] criar projeto spring
-- [x] criar as entidades e o banco de dados
-- [x] criar operações read
-- [x] criar operações create
-- [x] criar operações update
-- [x] criar operações delete
-- [x] utilizar o create para cadastrar o usuário
-- [x] criar testes unitários
-- [x] garantir cobertura de 100% dos testes
-- [ ] desafio ec2
+```text
+POST /users - Registra um novo usuário no banco
+```
+
+```json
+{
+    "name": "Clint Eastwood",
+    "cpf": "12345678910",
+    "telefone": "11916725678",
+    "correntista": true,
+    "saldo_cc": 1000.0
+}
+```
+
+**GET USERS**
+
+```text
+GET /users - Recupera uma lista de todos os usuários, mostrando seu ID e nome.
+```
+
+```json
+[
+    {
+      "id": 1,
+      "name": ""
+    },
+    {
+        "id": 2,
+        "name": ""
+    }
+]
+```
+
+```text
+GET /users/{id} - Recupera uma lista de um usuário a partir de seu ID, mostrando todos os seus dados do DB.
+```
+
+```json
+[
+    {
+      "id": 1,
+      "name": "",
+      "cpf": "12345678910",
+      "telefone": "11916725678",
+      "correntista": true,
+      "score_credito": 0.00,
+      "saldo_cc": 1000.0
+      
+    },
+    {
+      "id": 2,
+      "name": "",
+      "cpf": "12345678910",
+      "telefone": "11916725678",
+      "correntista": false,
+      "score_credito": 0.00,
+      "saldo_cc": 1000.0
+    }
+]
+```
+
+**DELETE USERS**
+
+```text
+
+DEL /users/{id} - Delete um usuário do banco a partir de seu ID.
+```
+
+```json
+{
+    "id": 1,
+    "name": "Clint Eastwood",
+    "cpf": "12345678910",
+    "telefone": "11916725678",
+    "correntista": true,
+    "socre_credito": 0.00,
+    "saldo_cc": 1000.0
+}
+```
+
+**UPDATE USERS**
+
+```text
+PUT /users - Atualiza os dados nome, telefone e correntista de um usuário a partir de seu CPF.
+```
+
+```json
+{
+    "name": "Clint Eastwood",
+    "cpf": "12345678910",
+    "telefone": "11916725678",
+    "correntista": true
+}
+```
+
+```text
+PACTH /users/{cpf}/score-credito - Atualiza o score de crédito do usuário em 10% do saldo disponível.
+```
+
+## Banco de Dados
+
+O projeto utiliza [H2 Database](https://www.h2database.com/html/tutorial.html) como um banco de dados.
