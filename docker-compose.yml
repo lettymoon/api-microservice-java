@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:latest
+    hostname: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=JaverDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+  api-java:
+    image: banco-javer:1.0.0
+    hostname: api-java
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  postgres-db:
