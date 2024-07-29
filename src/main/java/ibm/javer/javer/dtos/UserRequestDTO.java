@@ -11,11 +11,12 @@ import lombok.*;
 public class UserRequestDTO {
     @NotNull(message = "O campo cpf não pode ser nulo")
     @NotBlank(message = "O campo cpf é obrigatório")
-    @Size(min = 11, max = 11, message = "O campo cpf é inválido")
+    @Pattern(regexp="\\d{11}", message = "O campo cpf é inválido, apenas informe 11 digitos.")
     String cpf;
 
     @NotNull(message = "O campo nome não pode ser nulo")
     @NotEmpty(message = "O campo nome é obrigatório")
+    @Size(min=2, max=100)
     @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "O campo nome deve conter apenas letras")
     String nome;
 
@@ -28,7 +29,6 @@ public class UserRequestDTO {
     Boolean correntista;
 
     @NotNull(message = "O campo saldo não pode ser nulo")
-    @NotEmpty(message = "O campo saldo é obrigatório")
     @Min(value = 0, message = "O valor deve ser maior ou igual a zero")
     Double saldo_cc;
 }
