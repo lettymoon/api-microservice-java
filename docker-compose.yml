@@ -12,14 +12,21 @@ services:
       - "5432:5432"
     volumes:
       - postgres-db:/var/lib/postgresql/data
+    networks:
+      - mynetwork
 
   api-java:
     image: banco-javer:1.0.0
     hostname: api-java
     ports:
       - "8080:8080"
+    networks:
+      - mynetwork
     depends_on:
       - db
 
 volumes:
   postgres-db:
+
+networks:
+  mynetwork:
