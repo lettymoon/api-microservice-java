@@ -18,12 +18,18 @@ services:
   api-java:
     image: banco-javer:1.0.0
     hostname: api-java
-    ports:
-      - "8080:8080"
     networks:
       - mynetwork
     depends_on:
       - db
+
+  api-gateway:
+    image: banco-javer-gateway:1.0.0
+    hostname: api-gateway-java
+    ports:
+      - "8080:8080"
+    networks:
+      -
 
 volumes:
   postgres-db:
