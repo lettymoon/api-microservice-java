@@ -1,16 +1,23 @@
-# Banco Javer - Itaú/IBM
+[JAVA_BADGE]:https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
+[SPRING_BADGE]: https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white
+[POSTGRESQL_BADGE]:https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[AWS_BADGE]:https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white
+[LICENSE_BADGE]: https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
-Este projeto consiste em uma API desenvolvida com **Java**, utilizando o framework **Java Spring** e o **banco de dados H2.**
+<h1 align="center" style="font-weight: bold;">Banco Javer - Itaú/IBM 💻</h1>
+
+![java][JAVA_BADGE]
+![spring][SPRING_BADGE]
+![postgresql][POSTGRESQL_BADGE]
+![aws][AWS_BADGE]
+![license][LICENSE_BADGE]
+
+Este projeto consiste em uma API desenvolvida com **Java**, utilizando o framework **Java Spring** e o **banco de dados postgreSQL.**
 
 Foi realizado os testes unitários no formato Given-When-Then (GWT), utilizando as bibliotecas **JUnit, Mockito e AssertJ.**
 
 Este projeto foi desenvolvido como avaliação final da trilha de Java do projeto Itaú/IBM.
-
-## TO-DO: COLOCAR UMA LICENSA MIT
 
 ## Índice
 
@@ -32,10 +39,10 @@ O projeto segue uma arquitetura simples com Docker.
 
 ```mermaid
 graph TD
-    subgraph Aplication
+    subgraph Application
         direction TB
         JavaApp["API Java"]
-        H2Database[("H2 Database")]
+        H2Database[("Database")]
         JavaApp --> H2Database
     end
 ```
@@ -146,4 +153,4 @@ PACTH /users/{cpf}/score-credito - Atualiza o score de crédito do usuário em 1
 
 ## Banco de Dados
 
-O projeto utiliza [H2 Database](https://www.h2database.com/html/tutorial.html) como um banco de dados.
+O projeto utiliza [postgreSQL](https://www.postgresql.org/about/) como um banco de dados.
