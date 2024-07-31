@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserRepository repository;
@@ -22,35 +22,35 @@ public class UserController {
     @Autowired
     private UserService usersService;
 
-    @GetMapping
-    public ResponseEntity<ResponseDTO<List<UserResponseDTO>>> gettAllUsers(){
+    @GetMapping("/get")
+    public ResponseEntity<ResponseDTO<List<UserResponseDTO>>> getAllUsers(){
         ResponseDTO<List<UserResponseDTO>> response = usersService.getAllUsers();
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<ResponseDTO> createUser(@Valid @RequestBody UserRequestDTO data){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.createUser(data);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<ResponseDTO> getUserById(@PathVariable String id){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.getUserById(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String id){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.deleteUser(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateUser(@RequestBody UserRequestDTO data){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.updateUser(data);
 
