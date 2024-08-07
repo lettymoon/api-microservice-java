@@ -42,5 +42,5 @@ Então, estão prontos para embarcar nesta jornada desafiadora? Que os códigos 
 - [x] criar testes unitários
 - [x] garantir cobertura de 100% dos testes
 - [x] usar o docker na api
-- [ ] migrar para o banco de dados postgresql
+- [x] migrar para o banco de dados postgresql
 - [ ] desafio ec2
