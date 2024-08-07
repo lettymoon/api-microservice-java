@@ -36,12 +36,12 @@ public class User {
     @Column(name = "saldo_cc")
     private Double saldo_cc;
 
-    public User(UserRequestDTO data) {
-        this.cpf = data.getCpf();
-        this.nome = data.getNome();
-        this.telefone = data.getTelefone();
-        this.correntista = data.getCorrentista();
+    public User(UserRequestDTO userRequest) {
+        this.cpf = userRequest.getCpf();
+        this.nome = userRequest.getNome();
+        this.telefone = userRequest.getTelefone();
+        this.correntista = userRequest.getCorrentista();
         this.score_credito = 0.0;
-        this.saldo_cc = data.getSaldo_cc();
+        this.saldo_cc = userRequest.getSaldo_cc();
     }
 }

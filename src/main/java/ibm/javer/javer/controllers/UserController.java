@@ -1,5 +1,6 @@
 package ibm.javer.javer.controllers;
 
+import ibm.javer.javer.domain.user.User;
 import ibm.javer.javer.repositories.UserRepository;
 import ibm.javer.javer.services.UserService;
 import ibm.javer.javer.dtos.ResponseDTO;
@@ -22,35 +23,35 @@ public class UserController {
     @Autowired
     private UserService usersService;
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<ResponseDTO<List<UserResponseDTO>>> getAllUsers(){
         ResponseDTO<List<UserResponseDTO>> response = usersService.getAllUsers();
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<ResponseDTO> createUser(@Valid @RequestBody UserRequestDTO data){
-        ResponseDTO<UserAllDataResponseDTO> response = usersService.createUser(data);
+    @PostMapping
+    public ResponseEntity<ResponseDTO<UserAllDataResponseDTO>> createUser(@RequestBody UserRequestDTO userRequest){
+        ResponseDTO<UserAllDataResponseDTO> response = usersService.createUser(userRequest);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> getUserById(@PathVariable String id){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.getUserById(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String id){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.deleteUser(id);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<ResponseDTO> updateUser(@RequestBody UserRequestDTO data){
         ResponseDTO<UserAllDataResponseDTO> response = usersService.updateUser(data);
 

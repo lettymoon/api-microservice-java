@@ -1,6 +1,7 @@
 package ibm.javer.javer.infra;
 
 import ibm.javer.javer.dtos.ResponseDTO;
+import ibm.javer.javer.exceptions.UserExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class RestControllerAdviceExceptionHandler {
+public class RestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDTO<Map<String, List<ValidationErrorModel>>>> handleValidationErrors(MethodArgumentNotValidException ex) {
@@ -30,6 +31,12 @@ public class RestControllerAdviceExceptionHandler {
         Map<String, List<ValidationErrorModel>> errorResponse = new HashMap<>();
         errorResponse.put("errors", errors);
         return errorResponse;
+    }
+
+    @ExceptionHandler(UserExistException.class)
+    public ResponseEntity<ResponseDTO<RestErrorMessage>> userExistErrorHandler(UserExistException exception) {
+        RestErrorMessage threatResponse = new RestErrorMessage(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ResponseDTO<>(threatResponse.getMessage(), null, null));
     }
 
 }

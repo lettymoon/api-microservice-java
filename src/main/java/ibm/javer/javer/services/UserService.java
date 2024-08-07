@@ -1,6 +1,7 @@
 package ibm.javer.javer.services;
 
 import ibm.javer.javer.domain.user.User;
+import ibm.javer.javer.exceptions.UserExistException;
 import ibm.javer.javer.repositories.UserRepository;
 import ibm.javer.javer.dtos.ResponseDTO;
 import ibm.javer.javer.dtos.UserAllDataResponseDTO;
@@ -16,24 +17,22 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired
-    UserRepository usuariosRepository;
+    UserRepository userRepository;
 
-    // TODO: tem que ser uma transaction
-    public ResponseDTO<UserAllDataResponseDTO> createUser(UserRequestDTO data) {
-        Optional<User> existingUser = usuariosRepository.findByCpf(data.getCpf());
+    public ResponseDTO<UserAllDataResponseDTO> createUser(UserRequestDTO userRequest) {
+        Optional<User> existUser = userRepository.findByCpf(userRequest.getCpf());
 
-        if (existingUser.isPresent()) {
-            return new ResponseDTO<>("Usuário já existe", null, HttpStatus.CONFLICT);
+        if(existUser.isPresent()){
+            throw new UserExistException();
         }
 
-        //TODO: Tratar erro de bancos
-        User newUser = new User(data);
-        usuariosRepository.save(newUser);
-        return new ResponseDTO<>("Usuário cadastrado com sucesso", new UserAllDataResponseDTO(newUser), HttpStatus.CREATED);
+        User newUser = new User(userRequest);
+        userRepository.save(newUser);
+        return new ResponseDTO<>("Usuário cadastrado com sucesso", null, HttpStatus.OK);
     }
 
     public ResponseDTO<UserAllDataResponseDTO> getUserById(String id) {
-        Optional<User> user = usuariosRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não encontrado", null, HttpStatus.NOT_FOUND);
@@ -43,7 +42,7 @@ public class UserService {
     }
 
     public ResponseDTO<List<UserResponseDTO>> getAllUsers(){
-        List<UserResponseDTO> usuariosList = usuariosRepository.findAll()
+        List<UserResponseDTO> usuariosList = userRepository.findAll()
                 .stream()
                 .map(UserResponseDTO::new)
                 .toList();
@@ -54,18 +53,18 @@ public class UserService {
     }
 
     public ResponseDTO<UserAllDataResponseDTO> deleteUser(String id) {
-        Optional<User> user = usuariosRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
         }
 
-        usuariosRepository.deleteById(id);
+        userRepository.deleteById(id);
         return new ResponseDTO<>("Usuário deletado com sucesso :3", new UserAllDataResponseDTO(user.get()), HttpStatus.OK);
     }
 
     public ResponseDTO<UserAllDataResponseDTO> updateUser(UserRequestDTO data) {
-        Optional<User> oldUser = usuariosRepository.findByCpf(data.getCpf());
+        Optional<User> oldUser = userRepository.findByCpf(data.getCpf());
 
         if (!oldUser.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
@@ -76,21 +75,21 @@ public class UserService {
         newUser.setSaldo_cc(oldUser.get().getSaldo_cc());
         newUser.setScore_credito(oldUser.get().getScore_credito());
 
-        usuariosRepository.save(newUser);
+        userRepository.save(newUser);
 
         return new ResponseDTO<>("Usuário atualizado com sucesso", new UserAllDataResponseDTO(newUser), HttpStatus.OK);
 
     }
 
     public ResponseDTO<Double> updateScore(String cpf){
-        Optional<User> user = usuariosRepository.findByCpf(cpf);
+        Optional<User> user = userRepository.findByCpf(cpf);
 
         if (!user.isPresent()) {
             return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
         }
 
         user.get().setScore_credito(user.get().getSaldo_cc() * 0.1);
-        usuariosRepository.save(user.get());
+        userRepository.save(user.get());
 
         return new ResponseDTO<>("Score atual", user.get().getScore_credito(), HttpStatus.OK);
     }
