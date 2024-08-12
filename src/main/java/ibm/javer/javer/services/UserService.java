@@ -2,6 +2,7 @@ package ibm.javer.javer.services;
 
 import ibm.javer.javer.domain.user.User;
 import ibm.javer.javer.exceptions.UserExistException;
+import ibm.javer.javer.exceptions.UserNotExistException;
 import ibm.javer.javer.repositories.UserRepository;
 import ibm.javer.javer.dtos.ResponseDTO;
 import ibm.javer.javer.dtos.UserAllDataResponseDTO;
@@ -32,13 +33,13 @@ public class UserService {
     }
 
     public ResponseDTO<UserAllDataResponseDTO> getUserById(String id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> existUser = userRepository.findById(id);
 
-        if (!user.isPresent()) {
-            return new ResponseDTO<>("Usuário não encontrado", null, HttpStatus.NOT_FOUND);
+        if (!existUser.isPresent()) {
+            throw  new UserNotExistException();
         }
 
-        return new ResponseDTO<>("Usuário encontrado com sucesso", new UserAllDataResponseDTO(user.get()), HttpStatus.OK);
+        return new ResponseDTO<>("Usuário encontrado com sucesso", new UserAllDataResponseDTO(existUser.get()), HttpStatus.OK);
     }
 
     public ResponseDTO<List<UserResponseDTO>> getAllUsers(){
@@ -53,21 +54,21 @@ public class UserService {
     }
 
     public ResponseDTO<UserAllDataResponseDTO> deleteUser(String id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> existUser = userRepository.findById(id);
 
-        if (!user.isPresent()) {
-            return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
+        if (!existUser.isPresent()) {
+            throw  new UserNotExistException();
         }
 
         userRepository.deleteById(id);
-        return new ResponseDTO<>("Usuário deletado com sucesso :3", new UserAllDataResponseDTO(user.get()), HttpStatus.OK);
+        return new ResponseDTO<>("Usuário deletado com sucesso :3", new UserAllDataResponseDTO(existUser.get()), HttpStatus.OK);
     }
 
     public ResponseDTO<UserAllDataResponseDTO> updateUser(UserRequestDTO data) {
         Optional<User> oldUser = userRepository.findByCpf(data.getCpf());
 
         if (!oldUser.isPresent()) {
-            return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
+            throw  new UserNotExistException();
         }
 
         User newUser = new User(data);
@@ -85,7 +86,7 @@ public class UserService {
         Optional<User> user = userRepository.findByCpf(cpf);
 
         if (!user.isPresent()) {
-            return new ResponseDTO<>("Usuário não existe", null, HttpStatus.NOT_FOUND);
+            throw  new UserNotExistException();
         }
 
         user.get().setScore_credito(user.get().getSaldo_cc() * 0.1);

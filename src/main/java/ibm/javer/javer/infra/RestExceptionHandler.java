@@ -2,6 +2,7 @@ package ibm.javer.javer.infra;
 
 import ibm.javer.javer.dtos.ResponseDTO;
 import ibm.javer.javer.exceptions.UserExistException;
+import ibm.javer.javer.exceptions.UserNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,6 +38,12 @@ public class RestExceptionHandler {
     public ResponseEntity<ResponseDTO<RestErrorMessage>> userExistErrorHandler(UserExistException exception) {
         RestErrorMessage threatResponse = new RestErrorMessage(exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ResponseDTO<>(threatResponse.getMessage(), null, null));
+    }
+
+    @ExceptionHandler(UserNotExistException.class)
+    public ResponseEntity<ResponseDTO<RestErrorMessage>> userNotExistErrorHandler(UserNotExistException exception) {
+        RestErrorMessage threatResponse = new RestErrorMessage(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDTO<>(threatResponse.getMessage(), null, null));
     }
 
 }
