@@ -1,15 +1,17 @@
 [JAVA_BADGE]:https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
 [SPRING_BADGE]: https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white
 [POSTGRESQL_BADGE]:https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[DOCKER_BADGE]:https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
 [AWS_BADGE]:https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white
 [LICENSE_BADGE]: https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge
 
 
-<h1 align="center" style="font-weight: bold;">Banco Javer - Itaú/IBM 💻</h1>
+<h1 align="center" style="font-weight: bold;"> Banco Javer - API Microserviço </h1>
 
 ![java][JAVA_BADGE]
 ![spring][SPRING_BADGE]
 ![postgresql][POSTGRESQL_BADGE]
+![docker][DOCKER_BADGE]
 ![aws][AWS_BADGE]
 ![license][LICENSE_BADGE]
 
