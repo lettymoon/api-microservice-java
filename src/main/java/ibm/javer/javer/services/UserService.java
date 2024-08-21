@@ -8,6 +8,7 @@ import ibm.javer.javer.dtos.ResponseDTO;
 import ibm.javer.javer.dtos.UserAllDataResponseDTO;
 import ibm.javer.javer.dtos.UserRequestDTO;
 import ibm.javer.javer.dtos.UserResponseDTO;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
